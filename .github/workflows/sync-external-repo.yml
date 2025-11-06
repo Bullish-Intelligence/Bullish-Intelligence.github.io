@@ -11,6 +11,9 @@ on:
     paths:
       - '.github/workflows/sync-external-repo.yml'
 
+permissions:
+  contents: write
+
 jobs:
   sync:
     runs-on: ubuntu-latest
