@@ -39,6 +39,12 @@ jobs:
           # Define source and destination paths
           SOURCE_DIR="/tmp/source-repo"
           DEST_DIR="$PWD"
+
+          # Create destination directory structure
+          mkdir -p ${DEST_DIR}/content
+    
+          # Sync entire directory (delete removed files)
+          rsync -av --delete ${SOURCE_DIR}/content/posts/ ${DEST_DIR}/content/synced-posts/
           
           # Example 1: Copy specific directory
           # cp -r ${SOURCE_DIR}/content/posts/* ${DEST_DIR}/content/posts/
@@ -50,7 +56,7 @@ jobs:
           # find ${SOURCE_DIR} -name "*.md" -exec cp {} ${DEST_DIR}/content/posts/ \;
           
           # Example 4: Sync entire directory (delete removed files)
-          rsync -av --delete ${SOURCE_DIR}/content/posts/ ${DEST_DIR}/content/synced-posts/
+          # rsync -av --delete ${SOURCE_DIR}/content/posts/ ${DEST_DIR}/content/synced-posts/
           
           # Example 5: Copy with exclusions
           # rsync -av --exclude='.git' --exclude='drafts/' ${SOURCE_DIR}/content/ ${DEST_DIR}/content/
