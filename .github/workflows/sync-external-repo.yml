@@ -32,7 +32,11 @@ jobs:
           SOURCE_PAT: ${{ secrets.SOURCE_REPO_PAT }}
         run: |
           git clone https://${SOURCE_PAT}@github.com/Bullish-Design/Bullish-Intelligence.git /tmp/source-repo
-      
+          echo ""
+          echo "Source repo contents:"
+          ls -la /tmp/source-repo
+          echo ""
+          
       - name: Sync content using UV script
         run: |
           uv run /tmp/source-repo/scripts/sync-content.py
