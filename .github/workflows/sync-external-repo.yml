@@ -2,14 +2,9 @@
 name: Sync Content from External Repository
 
 on:
-  # Run on schedule (every 6 hours)
   schedule:
     - cron: '0 */6 * * *'
-  
-  # Allow manual trigger
   workflow_dispatch:
-  
-  # Optional: trigger when specific file changes
   push:
     branches:
       - main
@@ -27,39 +22,20 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           fetch-depth: 0
       
+      - name: Install uv
+        uses: astral-sh/setup-uv@v4
+        with:
+          enable-cache: true
+      
       - name: Clone source repository
         env:
           SOURCE_PAT: ${{ secrets.SOURCE_REPO_PAT }}
         run: |
-          # Clone the external repo
           git clone https://${SOURCE_PAT}@github.com/Bullish-Design/Bullish-Intelligence.git /tmp/source-repo
       
-      - name: Copy files from source to destination
+      - name: Sync content using UV script
         run: |
-          # Define source and destination paths
-          SOURCE_DIR="/tmp/source-repo"
-          DEST_DIR="$PWD"
-
-          # Create destination directory structure
-          mkdir -p ${DEST_DIR}/content
-    
-          # Sync entire directory (delete removed files)
-          rsync -av --delete ${SOURCE_DIR}/content/posts/ ${DEST_DIR}/content/synced-posts/
-          
-          # Example 1: Copy specific directory
-          # cp -r ${SOURCE_DIR}/content/posts/* ${DEST_DIR}/content/posts/
-          
-          # Example 2: Copy specific files
-          # cp ${SOURCE_DIR}/path/to/file.md ${DEST_DIR}/content/
-          
-          # Example 3: Copy all markdown files
-          # find ${SOURCE_DIR} -name "*.md" -exec cp {} ${DEST_DIR}/content/posts/ \;
-          
-          # Example 4: Sync entire directory (delete removed files)
-          # rsync -av --delete ${SOURCE_DIR}/content/posts/ ${DEST_DIR}/content/synced-posts/
-          
-          # Example 5: Copy with exclusions
-          # rsync -av --exclude='.git' --exclude='drafts/' ${SOURCE_DIR}/content/ ${DEST_DIR}/content/
+          uv run /tmp/source-repo/scripts/sync-content.py
       
       - name: Check for changes
         id: changes
