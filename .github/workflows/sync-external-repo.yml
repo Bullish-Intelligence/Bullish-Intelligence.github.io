@@ -38,7 +38,7 @@ jobs:
         run: |
           # Define source and destination paths
           SOURCE_DIR="/tmp/source-repo"
-          DEST_DIR="."
+          DEST_DIR="$PWD"
           
           # Example 1: Copy specific directory
           # cp -r ${SOURCE_DIR}/content/posts/* ${DEST_DIR}/content/posts/
