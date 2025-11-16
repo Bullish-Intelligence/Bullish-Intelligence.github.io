@@ -17,29 +17,43 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
-    env:
-      HUGO_ENVIRONMENT: production
-      HUGO_ENV: production
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-        with:
-          submodules: true      # in case you add any git submodule themes
-          fetch-depth: 0
 
-      - name: Setup Go (for Hugo modules)
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup GitHub Pages
+        uses: actions/configure-pages@v5
+
+      - name: Setup Go
         uses: actions/setup-go@v5
         with:
-          go-version: '1.22'
+          go-version: "1.21"
 
       - name: Setup Hugo
         uses: peaceiris/actions-hugo@v3
         with:
-          hugo-version: 'latest'
+          hugo-version: "0.134.3"
           extended: true
 
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      # Docsy + Hugo Modules: generate/update package.json and package-lock.json
+      - name: Prepare npm dependencies from Hugo modules
+        run: |
+          hugo mod npm pack
+
+      - name: Install npm dependencies
+        run: |
+          npm ci
+
       - name: Build site
-        run: hugo --minify
+        run: |
+          hugo --minify
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
