@@ -1,5 +1,5 @@
 ---
-title: test_page
+title: "Test_Page"
 ---
 
 # Test Page
