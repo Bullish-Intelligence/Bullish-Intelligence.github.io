@@ -1,4 +1,4 @@
-baseURL = "https://bullish-intelligence.github.io/"
+baseURL = "https://Bullish-Intelligence.github.io/"
 title = "Bullish Intelligence"
 languageCode = "en-us"
 
@@ -13,5 +13,5 @@ languageCode = "en-us"
 
   # Import your custom Roxo fork as a module.
   [[module.imports]]
-    path = "github.com/bullish-intelligence/roxo-muted"
+    path = "github.com/Bullish-Intelligence/roxo-muted"
 
