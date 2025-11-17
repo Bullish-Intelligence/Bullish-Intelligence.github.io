@@ -2,19 +2,16 @@ baseURL = "https://bullish-intelligence.github.io/"
 title = "Bullish Intelligence"
 languageCode = "en-us"
 
-# Optional but harmless with modules; Docsy docs often omit this if using [module] imports.
-theme = ["github.com/google/docsy"]
-
+# We're using Hugo Modules to pull in the custom Roxo theme.
 [module]
+  # Direct mode is important when using private GitHub repos for modules.
   proxy = "direct"
 
   [module.hugoVersion]
     extended = true
     min = "0.120.0"
 
+  # Import your custom Roxo fork as a module.
   [[module.imports]]
-    path = "github.com/google/docsy"
-
-  [[module.imports]]
-    path = "github.com/google/docsy/dependencies"
+    path = "github.com/bullish-intelligence/roxo-muted"
 
