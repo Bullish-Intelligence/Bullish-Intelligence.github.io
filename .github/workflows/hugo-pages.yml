@@ -39,7 +39,7 @@ jobs:
       # Make Go/Hugo use the GITHUB_TOKEN when fetching modules from GitHub.
       - name: Configure git for private Go modules
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.ROXO_THEME_TOKEN }}
         run: |
           git config --global url."https://x-access-token:${GITHUB_TOKEN}@github.com/".insteadOf "https://github.com/"
 
