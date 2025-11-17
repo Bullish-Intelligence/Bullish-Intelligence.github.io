@@ -36,7 +36,7 @@ jobs:
           hugo-version: "0.146.0"
           extended: true
 
-      # Make Go/Hugo use the GITHUB_TOKEN when fetching modules from GitHub.
+      # Make Go/Hugo use the ROXO_THEME_TOKEN when fetching modules from GitHub.
       - name: Configure git for private Go modules
         env:
           GITHUB_TOKEN: ${{ secrets.ROXO_THEME_TOKEN }}
