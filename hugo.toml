@@ -15,3 +15,25 @@ languageCode = "en-us"
   [[module.imports]]
     path = "github.com/Bullish-Intelligence/roxo-muted"
 
+# --- Menus expected by Roxo theme ---
+[menu]
+  [[menu.nav]]
+    name   = "Home"
+    url    = ""
+    weight = 1
+
+  [[menu.nav]]
+    name   = "Posts"
+    url    = "posts"
+    weight = 2
+
+  [[menu.nav]]
+    name   = "About"
+    url    = "about"
+    weight = 3
+
+# Theme params used in header
+[params]
+  #logo          = "images/logo.png"          # put a logo at static/images/logo.png if you want
+  businessName  = "Bullish Intelligence"
+
