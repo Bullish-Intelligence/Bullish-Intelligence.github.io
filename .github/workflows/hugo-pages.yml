@@ -36,29 +36,40 @@ jobs:
           hugo-version: "0.146.0"
           extended: true
 
-      - name: Setup Node
-        uses: actions/setup-node@v4
+      # Make Go/Hugo use the GITHUB_TOKEN when fetching modules from GitHub.
+      - name: Configure git for private Go modules
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git config --global url."https://${GITHUB_TOKEN}@github.com/".insteadOf "https://github.com/"
+
+
+      - name: Cache Hugo modules and Go build cache
+        uses: actions/cache@v4
         with:
-          node-version: "20"
-          cache: "npm"
+          path: |
+            ~/.cache/hugo
+            ~/.cache/go-build
+            ~/go/pkg/mod
+          key: ${{ runner.os }}-hugo-${{ hashFiles('**/go.sum') }}
+          restore-keys: |
+            ${{ runner.os }}-hugo-
 
-      # Docsy + Hugo Modules: generate/update package.json and package-lock.json
-      - name: Prepare npm dependencies from Hugo modules
+      - name: Build site with Hugo
+        env:
+          HUGO_ENVIRONMENT: production
+          HUGO_ENV: production
+          HUGO_MODULE_PROXY: direct
+          GOPRIVATE: github.com/bullish-intelligence/*
+          GONOSUMDB: github.com/bullish-intelligence/*
         run: |
-          hugo mod npm pack
-
-      - name: Install npm dependencies
-        run: |
-          npm ci
-
-      - name: Build site
-        run: |
+          hugo mod tidy
           hugo --minify
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: public
+          path: ./public
 
   deploy:
     runs-on: ubuntu-latest
