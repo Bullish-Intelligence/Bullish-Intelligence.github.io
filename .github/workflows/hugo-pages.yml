@@ -61,7 +61,7 @@ jobs:
           HUGO_ENV: production
           HUGO_MODULE_PROXY: direct
           GOPRIVATE: github.com/Bullish-Intelligence/*  # Capitalization important?
-          GONOSUMDB: github.com/Bullish-Intelligence/*
+          GONOSUMDB: github.com/Bullish-Intelligence/*  # Capitalization important?
         run: |
           hugo mod tidy
           hugo --minify
