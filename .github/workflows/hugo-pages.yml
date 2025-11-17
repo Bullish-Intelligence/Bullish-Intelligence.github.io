@@ -60,7 +60,7 @@ jobs:
           HUGO_ENVIRONMENT: production
           HUGO_ENV: production
           HUGO_MODULE_PROXY: direct
-          GOPRIVATE: github.com/Bullish-Intelligence/*
+          GOPRIVATE: github.com/Bullish-Intelligence/*  # Capitalization important?
           GONOSUMDB: github.com/Bullish-Intelligence/*
         run: |
           hugo mod tidy
