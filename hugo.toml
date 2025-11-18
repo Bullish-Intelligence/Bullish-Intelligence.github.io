@@ -15,25 +15,198 @@ languageCode = "en-us"
   [[module.imports]]
     path = "github.com/Bullish-Intelligence/roxo-muted"
 
-# --- Menus expected by Roxo theme ---
+
+# ---------------------------------------------------------
+# Menus (Roxo expects these)
+# ---------------------------------------------------------
 [menu]
+  # Navbar Menus
   [[menu.nav]]
     name   = "Home"
     url    = ""
     weight = 1
 
   [[menu.nav]]
-    name   = "Posts"
-    url    = "posts"
+    name   = "About"
+    url    = "about"
     weight = 2
 
   [[menu.nav]]
-    name   = "About"
-    url    = "about"
+    name   = "Portfolio"
+    url    = "portfolio"
     weight = 3
 
-# Theme params used in header
-[params]
-  #logo          = "images/logo.png"          # put a logo at static/images/logo.png if you want
-  businessName  = "Bullish Intelligence"
+  [[menu.nav]]
+    name   = "Blog"
+    url    = "blog"
+    weight = 4
 
+  [[menu.nav]]
+    name   = "Contact"
+    url    = "contact"
+    weight = 5
+
+# ---------------------------------------------------------
+# Theme params used across header, sections, footer, etc.
+# ---------------------------------------------------------
+[params]
+  # Used in header template
+  businessName          = "Bullish Intelligence"
+
+  # Branding assets (put these under /static/images/)
+  logo                  = "images/logo.png"
+  logo_footer           = "images/logo-footer.png"
+  favicon_icon          = "images/favicon.ico"
+  favicon_shortcut_icon = "images/favicon.png"
+
+  # Optional extra SCSS/CSS overrides
+  custom_stylesheets    = []   # e.g. [ "scss/custom.scss" ]
+
+  # Date format used in blog/post meta
+  dateFormat            = "02 JAN 2006"
+
+  # Meta data
+  description           = "Bullish Intelligence | AI, Data Science & Consumer Goods Product Design Studio"
+  author                = "Bullish Intelligence"
+
+  # Google Analytics (note: key name kept as in original theme)
+  googleAnalitycsID     = ""   # e.g. "G-XXXXXXXXXX"
+
+  # Form handling (Fabform / Formspree-style)
+  fabform               = "https://fabform.io/f/YOUR_FORM_ID"
+
+  # -------------------------------------------------------
+  # Contact Form text + project types
+  # -------------------------------------------------------
+  [params.contactForm]
+    placeholder_first_name        = "First Name"
+    placeholder_last_name         = "Last Name"
+    placeholder_email             = "Email"
+    placeholder_project_type      = "Project Type"
+    placeholder_about_the_project = "Tell me about the product, data, and goals"
+    send_message                  = "Send Message"
+
+    # Project type options in the select
+    [[params.contactForm.projectType]]
+      value = "ai-product"
+      title = "AI Product Strategy"
+
+    [[params.contactForm.projectType]]
+      value = "data-science"
+      title = "Data Science & Experimentation"
+
+    [[params.contactForm.projectType]]
+      value = "ux-cpg"
+      title = "Consumer Goods Experience Design"
+
+    [[params.contactForm.projectType]]
+      value = "data-tools"
+      title = "Data Products & Decision Tools"
+
+  # -------------------------------------------------------
+  # Navbar call-to-action button
+  # -------------------------------------------------------
+  [params.navAction]
+    status = true
+    name   = "Get in touch"
+    url    = "contact"
+
+  # -------------------------------------------------------
+  # Banner / hero section
+  # -------------------------------------------------------
+  [params.banner]
+    enable               = true
+    background_image     = "images/backgrounds/hero-background.jpg"
+    heading              = "A product studio for AI, data, and consumer brands."
+    tagline              = "BULLISH ON DATA. BULLISH ON DESIGN."
+    primary_button       = "See the work"
+    primary_button_url   = "portfolio"
+    secondary_button     = "Start a project"
+    secondary_button_url = "contact"
+
+  # -------------------------------------------------------
+  # Blog section (card “read more” label)
+  # -------------------------------------------------------
+  [params.blog]
+    read_more = "read more"
+
+  # -------------------------------------------------------
+  # Portfolio section labels
+  # -------------------------------------------------------
+  [params.portfolio]
+    enable       = true
+    title        = "RECENT WORK & EXPERIMENTS"
+    subtitle     = "AI and data-driven products for consumer and commerce brands."
+    view_project = "view project"
+    more_works   = "more work"
+    scroll_down  = "scroll down"
+
+  # -------------------------------------------------------
+  # Call to action section
+  # -------------------------------------------------------
+  [params.call_to_action]
+    enable             = true
+    background_image   = "images/backgrounds/cta-background.jpg"
+    title              = "READY TO MAKE A BULLISH BET?"
+    primary_button     = "Submit a project brief"
+    primary_button_url = "contact"
+    secondary_button   = "Browse past work"
+    secondary_button_url = "portfolio"
+
+  # -------------------------------------------------------
+  # Footer configuration
+  # -------------------------------------------------------
+  [params.footer]
+    qr_print = false
+
+  # Footer Contact Info
+  [params.footer.contactInfo]
+    title   = "Contact"
+    address = "Remote-first studio<br>Collaborating across US & EU time zones"
+    phone   = ""
+    email   = "hello@bullishintelligence.com"
+
+  # Footer Sitemap
+  [params.footer.sitemap]
+    title = "Sitemap"
+
+    [[params.footer.sitemap.link]]
+      name = "About"
+      url  = "about"
+
+    [[params.footer.sitemap.link]]
+      name = "Portfolio"
+      url  = "portfolio"
+
+    [[params.footer.sitemap.link]]
+      name = "Blog"
+      url  = "blog"
+
+    [[params.footer.sitemap.link]]
+      name = "Contact"
+      url  = "contact"
+
+  # Footer Social Media
+  [params.footer.social]
+    title = "Social"
+
+    [[params.footer.social.link]]
+      name = "LinkedIn"
+      url  = "https://www.linkedin.com/in/your-handle/"
+
+    [[params.footer.social.link]]
+      name = "Medium"
+      url  = "https://medium.com/@your-handle"
+
+    [[params.footer.social.link]]
+      name = "GitHub"
+      url  = "https://github.com/Bullish-Intelligence"
+
+  # Short footer blurb
+  [params.footer.service]
+    title       = "What Bullish Intelligence does"
+    description = "Design AI surfaces, build data products, and run experiments that actually change customer behavior."
+
+  # “Back to top” text
+  [params.footer.back_to_top]
+    description = "Take me back to the top"
