@@ -1,13 +1,13 @@
 # Development environment of bullish-intelligence.github.io.
 { pkgs, ... }:
 {
-  packages = [ pkgs.git ];
+  packages = [ pkgs.git pkgs.go pkgs.hugo ];
 
   # Testee runs the standard tasks (check:*, test:*).
   # Every task declares `input.testee`, so Testee can reuse a verdict when a commit
   # changes none of its inputs. Run `testee doctor` after any edit to this table.
   # devman's `base` group calls `base:check` and `base:test`.
-  # A blank site has nothing to build. The checks below are the whole gate.
+  # The required site check builds the Hugo site from its pinned theme modules.
   tasks = {
     "check:lint" = {
       exec = ''
@@ -38,10 +38,11 @@
 
     "check:types" = {
       exec = ''
-        echo "n/a: blank site: no typed language"
-        exit 0
+        set -eu
+        cd "$DEVENV_ROOT"
+        hugo --minify --destination "$TESTEE_RUN_DIR/public"
       '';
-      input.testee.ignores = [ "**" ];
+      input.testee.reads = [ "hugo.toml" "content/**" "go.mod" "go.sum" "_vendor/**" ];
     };
 
     "test:quick" = {

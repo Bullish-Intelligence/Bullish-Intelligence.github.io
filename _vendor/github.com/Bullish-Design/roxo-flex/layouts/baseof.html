@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="{{ site.Language.Lang }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ if .IsHome }}{{ site.Title }}{{ else }}{{ .Title }} · {{ site.Title }}{{ end }}</title>
+  <meta name="description" content="{{ .Description | default site.Params.description | default site.Title }}">
+  {{ with site.Params.favicon }}<link rel="icon" href="{{ . | relURL }}">{{ end }}
+  {{ $s := site.Params.style }}
+  {{ range site.Params.font_faces }}
+    <style>
+      @font-face {
+        font-family: {{ printf "%q" .family | safeCSS }};
+        src: url("{{ .src | relURL }}") format("{{ .format | default "woff2" }}");
+        font-weight: {{ .weight | default "400" | safeCSS }};
+        font-style: {{ .style | default "normal" | safeCSS }};
+        font-display: swap;
+      }
+    </style>
+  {{ end }}
+  <style>
+    :root {
+      --color-bg: {{ $s.background | default "#ffffff" | safeCSS }};
+      --color-surface: {{ $s.surface | default "#f3f4f5" | safeCSS }};
+      --color-text: {{ $s.text | default "#20262c" | safeCSS }};
+      --color-muted: {{ $s.muted | default "#58636b" | safeCSS }};
+      --color-border: {{ $s.border | default "#d4dadd" | safeCSS }};
+      --color-accent: {{ $s.accent | default "#285f70" | safeCSS }};
+      --color-on-accent: {{ $s.on_accent | default "#ffffff" | safeCSS }};
+      --font-body: {{ $s.font_body | default "system-ui, sans-serif" | safeCSS }};
+      --font-heading: {{ $s.font_heading | default "system-ui, sans-serif" | safeCSS }};
+      --type-scale: {{ $s.type_scale | default "1.2" | safeCSS }};
+      --space: {{ $s.spacing | default "1rem" | safeCSS }};
+      --button-radius: {{ $s.button_radius | default "0.4rem" | safeCSS }};
+      --hero-image-radius: {{ $s.hero_image_radius | default "0" | safeCSS }};
+      --image-filter: {{ $s.image_filter | default "none" | safeCSS }};
+      --icon-size: {{ $s.icon_size | default "1.15rem" | safeCSS }};
+    }
+  </style>
+  {{ with resources.Get "css/theme.css" }}<link rel="stylesheet" href="{{ .RelPermalink }}">{{ end }}
+  {{ with site.Params.custom_css }}<link rel="stylesheet" href="{{ . | relURL }}">{{ end }}
+  {{ with resources.Get "js/previews.js" }}<script src="{{ .RelPermalink }}" defer></script>{{ end }}
+</head>
+<body>
+  {{ partial "header.html" . }}
+  <main id="main">{{ block "main" . }}{{ end }}</main>
+  {{ partial "footer.html" . }}
+</body>
+</html>

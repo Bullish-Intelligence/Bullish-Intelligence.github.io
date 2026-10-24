@@ -1,0 +1,31 @@
+{{- $url := urls.Parse .Destination -}}
+{{- $href := $url.String -}}
+{{- $target := false -}}
+{{- if strings.HasPrefix $href "#" -}}
+  {{- $href = printf "%s#%s" .PageInner.RelPermalink $url.Fragment -}}
+{{- else if and $href (not $url.IsAbs) -}}
+  {{- $path := strings.TrimPrefix "./" $url.Path -}}
+  {{- $target = .PageInner.GetPage $path -}}
+  {{- $resource := false -}}
+  {{- if not $target -}}
+    {{- $resource = or (.PageInner.Resources.Get $path) (resources.Get $path) -}}
+  {{- end -}}
+  {{- with or $target $resource -}}
+    {{- $href = .RelPermalink -}}
+    {{- with $url.RawQuery -}}{{- $href = printf "%s?%s" $href . -}}{{- end -}}
+    {{- with $url.Fragment -}}{{- $href = printf "%s#%s" $href . -}}{{- end -}}
+  {{- end -}}
+{{- end -}}
+{{- if and $target $target.Params.preview -}}
+  {{- partial "link-preview.html" (dict
+    "href" $href
+    "link_title" .Title
+    "label" .Text
+    "title" $target.Title
+    "summary" $target.Description
+    "image" $target.Params.image
+    "image_alt" $target.Params.image_alt
+  ) -}}
+{{- else -}}
+  <a href="{{ $href }}"{{ with .Title }} title="{{ . }}"{{ end }}>{{ .Text }}</a>
+{{- end -}}

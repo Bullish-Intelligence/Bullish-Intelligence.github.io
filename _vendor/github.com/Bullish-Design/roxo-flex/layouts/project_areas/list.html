@@ -1,0 +1,1 @@
+{{ define "main" }}<section class="section page-top"><div class="container"><h1>{{ .Title }}</h1><div class="prose">{{ .Content }}</div><div class="card-grid">{{ range .Sections.ByWeight }}{{ partial "card.html" . }}{{ end }}{{ range .RegularPages.ByWeight }}{{ partial "card.html" . }}{{ end }}</div></div></section>{{ end }}

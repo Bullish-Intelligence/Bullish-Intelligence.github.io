@@ -1,0 +1,12 @@
+<span class="link-preview">
+  <a href="{{ .href }}"{{ with .link_title }} title="{{ . }}"{{ end }}>{{ .label }}</a>
+  <button class="link-preview__toggle" type="button" aria-label="Show preview for {{ .title }}" aria-expanded="false" hidden>ⓘ</button>
+  <span class="link-preview__card" role="dialog" aria-label="{{ .title }}" hidden>
+    <a class="link-preview__destination" href="{{ .href }}">
+      {{- with .image }}<img src="{{ . | relURL }}" alt="{{ $.image_alt | default $.title }}">{{ end -}}
+      <strong class="link-preview__title">{{ .title }}</strong>
+      {{- with .summary }}<span class="link-preview__summary">{{ . }}</span>{{ end -}}
+    </a>
+    <button class="link-preview__close" type="button">Close preview</button>
+  </span>
+</span>

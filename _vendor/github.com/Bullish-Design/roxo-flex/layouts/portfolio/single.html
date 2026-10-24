@@ -1,0 +1,1 @@
+{{ define "main" }}<article class="section page-top"><div class="container narrow"><h1>{{ .Title }}</h1>{{ with .Params.image }}<img class="feature-image" src="{{ . | relURL }}" alt="{{ $.Params.image_alt | default $.Title }}">{{ end }}<div class="prose">{{ .Content }}</div></div></article>{{ end }}

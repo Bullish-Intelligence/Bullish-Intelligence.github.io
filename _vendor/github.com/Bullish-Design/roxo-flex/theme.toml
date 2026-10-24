@@ -1,0 +1,6 @@
+name = "Roxo Flex"
+license = "MIT"
+licenselink = "https://github.com/Bullish-Design/roxo-flex/blob/main/LICENSE"
+description = "A configurable Hugo theme for small teams and portfolios."
+homepage = "https://github.com/Bullish-Design/roxo-flex"
+min_version = "0.162.1"

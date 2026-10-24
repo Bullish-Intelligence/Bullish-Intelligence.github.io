@@ -11,4 +11,6 @@
 /.worktrees
 /devenv.local.nix
 /.jj/
+/.hugo_build.lock
+/public/
 # devenv.lock stays tracked. Testee needs it.

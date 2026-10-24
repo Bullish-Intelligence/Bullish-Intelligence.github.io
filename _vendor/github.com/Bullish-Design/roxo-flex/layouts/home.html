@@ -1,0 +1,5 @@
+{{ define "main" }}
+  {{ range .Params.sections }}
+    {{ partial "home-section.html" (dict "Page" $ "Name" .) }}
+  {{ end }}
+{{ end }}

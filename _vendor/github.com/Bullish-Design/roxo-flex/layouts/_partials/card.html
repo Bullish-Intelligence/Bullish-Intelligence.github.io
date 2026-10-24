@@ -1,0 +1,3 @@
+<article class="card">
+  <a href="{{ .RelPermalink }}">{{ with .Params.image }}<img src="{{ . | relURL }}" alt="{{ $.Params.image_alt | default $.Title }}">{{ end }}<div class="card-copy"><h3>{{ .Title }}</h3>{{ with .Description }}<p>{{ . }}</p>{{ end }}</div></a>
+</article>

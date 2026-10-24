@@ -1,0 +1,36 @@
+{{ $p := .Page }}
+{{ $name := .Name }}
+{{ $section := index $p.Params $name }}
+{{ if and $section $section.enabled }}
+  {{ if eq $name "hero" }}
+    <section class="hero section" id="hero"><div class="container hero-grid">
+      <div><p class="eyebrow">{{ $section.eyebrow }}</p><h1>{{ $section.title }}</h1><p class="lead">{{ $section.text }}</p>
+        {{ with $section.button }}<a class="button" href="{{ .url | relURL }}">{{ .label }}{{ with .icon }}{{ partial "icon.html" (dict "src" . "class" "button-icon") }}{{ end }}</a>{{ end }}
+      </div>
+      {{ with $section.image }}<img class="hero-image" src="{{ . | relURL }}" alt="{{ $section.image_alt | default "" }}">{{ end }}
+    </div></section>
+  {{ else if eq $name "statistics" }}
+    <section class="section band" id="statistics"><div class="container"><h2>{{ $section.title }}</h2><div class="stat-grid">
+      {{ range $section.items }}<div class="stat"><strong>{{ .before }}{{ .number }}{{ .after }}</strong><span>{{ .label }}</span></div>{{ end }}
+    </div></div></section>
+  {{ else if eq $name "portfolio" }}
+    <section class="section" id="portfolio"><div class="container"><div class="section-heading"><h2>{{ $section.title }}</h2>{{ with $section.text }}<p>{{ . }}</p>{{ end }}</div><div class="card-grid">
+      {{ $pages := where site.RegularPages "Section" "portfolio" }}
+      {{ range first ($section.limit | default 6) ($pages.ByWeight) }}{{ partial "card.html" . }}{{ end }}
+    </div>{{ with $section.button }}<p><a class="text-link" href="{{ .url | relURL }}">{{ .label }}</a></p>{{ end }}</div></section>
+  {{ else if eq $name "testimonials" }}
+    <section class="section band" id="testimonials"><div class="container"><h2>{{ $section.title }}</h2><div class="card-grid">
+      {{ range $section.items }}<blockquote class="quote"><p>“{{ .quote }}”</p><footer><strong>{{ .name }}</strong>{{ with .role }} · {{ . }}{{ end }}</footer></blockquote>{{ end }}
+    </div></div></section>
+  {{ else if eq $name "clients" }}
+    <section class="section" id="clients"><div class="container"><h2>{{ $section.title }}</h2><div class="client-grid">
+      {{ range $section.items }}{{ $client := . }}<div class="client">{{ with .logo }}<img src="{{ . | relURL }}" alt="{{ $client.name }}">{{ else }}<strong>{{ $client.name }}</strong>{{ end }}</div>{{ end }}
+    </div></div></section>
+  {{ else if eq $name "team" }}
+    <section class="section band" id="team"><div class="container"><h2>{{ $section.title }}</h2><div class="card-grid">
+      {{ range $section.items }}<article class="card team-card">{{ with .image }}<img src="{{ . | relURL }}" alt="">{{ end }}<h3>{{ .name }}</h3><p>{{ .role }}</p></article>{{ end }}
+    </div></div></section>
+  {{ else if eq $name "cta" }}
+    <section class="section cta" id="cta"><div class="container"><h2>{{ $section.title }}</h2><p>{{ $section.text }}</p>{{ with $section.button }}<a class="button" href="{{ .url | relURL }}">{{ .label }}{{ with .icon }}{{ partial "icon.html" (dict "src" . "class" "button-icon") }}{{ end }}</a>{{ end }}</div></section>
+  {{ end }}
+{{ end }}

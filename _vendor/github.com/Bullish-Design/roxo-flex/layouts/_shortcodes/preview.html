@@ -1,0 +1,26 @@
+{{- $pageRef := .Get "page" -}}
+{{- $href := .Get "href" -}}
+{{- if and $pageRef $href -}}
+  {{- errorf "preview shortcode: set page or href, not both (%s)" .Position -}}
+{{- end -}}
+{{- $title := .Get "title" -}}
+{{- $summary := .Get "summary" -}}
+{{- $image := .Get "image" -}}
+{{- $imageAlt := .Get "image_alt" -}}
+{{- with $pageRef -}}
+  {{- $page := site.GetPage . -}}
+  {{- if not $page -}}
+    {{- errorf "preview shortcode: page %q does not exist (%s)" $pageRef $.Position -}}
+  {{- end -}}
+  {{- $href = $page.RelPermalink -}}
+  {{- $title = $page.Title -}}
+  {{- if not $summary -}}{{- $summary = $page.Description -}}{{- end -}}
+  {{- if not $image -}}{{- $image = $page.Params.image -}}{{- end -}}
+  {{- if not $imageAlt -}}{{- $imageAlt = $page.Params.image_alt -}}{{- end -}}
+{{- end -}}
+{{- if or (not $href) (not $title) -}}
+  {{- errorf "preview shortcode: set page, or set both href and title (%s)" .Position -}}
+{{- end -}}
+{{- $label := .Inner | plainify -}}
+{{- if not $label -}}{{- $label = $title -}}{{- end -}}
+{{- partial "link-preview.html" (dict "href" $href "label" $label "title" $title "summary" $summary "image" $image "image_alt" $imageAlt) -}}

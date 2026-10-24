@@ -1,9 +1,11 @@
 # AGENTS.md
 
-This is the blank bullish-intelligence.github.io site. It holds no site content yet.
+This Hugo site uses the Roxo Flex theme. Keep site settings in `hugo.toml`.
+Keep homepage sections in `content/_index.md` and page content in `content/`.
 
 ## Verification
 
-Run `testee verify` from the repository root. A change needs a green result.
-Run other commands through the devenv: `devenv shell -- <command>`.
+Run `devenv shell -- testee verify` from the repository root. The required checks include a Hugo build.
+After an edit to the Testee task table in `devenv.nix`, run `devenv shell -- testee doctor`.
+Run other commands through devenv: `devenv shell -- <command>`.
 Use Gitman to open and close workspaces: `gitman work NAME`, then `gitman done NAME`.

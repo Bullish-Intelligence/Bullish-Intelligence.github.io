@@ -1,0 +1,62 @@
+baseURL = "https://bullish-intelligence.github.io/"
+title = "Bullish Intelligence"
+theme = ["github.com/Bullish-Design/roxo-flex"]
+locale = "en-us"
+disableKinds = ["taxonomy", "term"]
+
+[module.hugoVersion]
+extended = true
+min = "0.162.1"
+
+[params]
+business_name = "Bullish Intelligence"
+description = "AI, data science, and consumer goods product design."
+
+[params.contact]
+email = "bullishintelligenceai@gmail.com"
+
+[params.style]
+background = "#f8f9fa"
+surface = "#e9ecef"
+text = "#2c2c2c"
+muted = "#6e6e6e"
+accent = "#3a3a3a"
+on_accent = "#ffffff"
+border = "#d2d2d2"
+font_body = "Arial, sans-serif"
+font_heading = "Georgia, serif"
+type_scale = "1.22"
+spacing = "1.1rem"
+button_radius = "0"
+hero_image_radius = "0"
+image_filter = "grayscale(1)"
+icon_size = "1.15rem"
+
+[[params.social]]
+name = "GitHub"
+url = "https://github.com/Bullish-Intelligence"
+
+[[menu.main]]
+name = "Home"
+url = "/"
+weight = 1
+
+[[menu.main]]
+name = "About"
+url = "/about/"
+weight = 2
+
+[[menu.main]]
+name = "Portfolio"
+url = "/portfolio/"
+weight = 3
+
+[[menu.main]]
+name = "Blog"
+url = "/blog/"
+weight = 4
+
+[[menu.main]]
+name = "Contact"
+url = "/contact/"
+weight = 5
