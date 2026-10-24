@@ -1,0 +1,19 @@
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div>
+      <a class="brand" href="{{ site.Home.RelPermalink }}">
+        {{ with site.Params.footer_logo }}<img src="{{ . | relURL }}" alt="{{ site.Params.business_name | default site.Title }} emblem" width="44" height="44">{{ end }}
+        <span>{{ site.Params.business_name | default site.Title }}</span>
+      </a>
+      <p>{{ site.Params.copyright | default (printf "© %d %s" now.Year (site.Params.business_name | default site.Title)) }}</p>
+    </div>
+    <address>
+      {{ with site.Params.contact.address }}<span>{{ . }}</span>{{ end }}
+      {{ with site.Params.contact.email }}<a href="mailto:{{ . }}">{{ . }}</a>{{ end }}
+      {{ with site.Params.contact.phone }}<a href="tel:{{ . }}">{{ . }}</a>{{ end }}
+    </address>
+    <div class="social-links" aria-label="Social links">
+      {{ range site.Params.social }}<a href="{{ .url | safeURL }}" rel="noopener noreferrer">{{ with .icon }}{{ partial "icon.html" (dict "src" . "class" "social-icon") }}{{ end }}{{ .name }}</a>{{ end }}
+    </div>
+  </div>
+</footer>

@@ -21,9 +21,12 @@
       exec = ''
         set -eu
         cd "$DEVENV_ROOT"
-        # Every tracked file is text (grep -I rejects a binary file).
+        # Check text files. Skip raster images and icon files.
         bad=0
         for f in $(git ls-files); do
+          case "$f" in
+            *.png|*.ico|*.jpg|*.jpeg|*.webp|*.gif) continue ;;
+          esac
           if [ -f "$f" ] && [ -s "$f" ] && ! grep -Iq . "$f"; then
             echo "not text: $f"
             bad=1
