@@ -1,0 +1,14 @@
+# Machine-local links and state (the central devman link plane, linkman, gitman).
+# Names are root-anchored, so a nested file of the same name stays tracked.
+/.devenv*
+/.direnv
+/.envrc
+/.agents
+/.claude
+/.loci
+/.devman
+/.gitman
+/.worktrees
+/devenv.local.nix
+/.jj/
+# devenv.lock stays tracked. Testee needs it.
