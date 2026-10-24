@@ -1,0 +1,9 @@
+{{- /* Date and tag links for one page. */ -}}
+<p class="meta">
+  {{- if not .Date.IsZero }}<time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2 January 2006" }}</time>{{ end }}
+  {{- with .GetTerms "tags" }}
+    <span class="tags">
+      {{- range . }} <a class="tag" href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>{{ end }}
+    </span>
+  {{- end }}
+</p>

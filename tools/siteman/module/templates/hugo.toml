@@ -1,0 +1,29 @@
+baseURL = "https://example.com/"
+locale  = "en-us"
+title   = "My siteman site"
+
+# siteman keeps Hugo machinery in .siteman/; authored content stays at the repo
+# root (content/, static/, assets/) so live-reload works with no symlinks.
+layoutDir    = ".siteman/layouts"   # project-level template OVERRIDES (empty by default)
+archetypeDir = ".siteman/archetypes"
+themesDir    = ".siteman/themes"
+resourceDir  = ".siteman/resources"
+publishDir   = "public"   # siteman-build, -check, and -clean follow this; also update .gitignore if you change it
+
+# Layout precedence is, highest first:
+#   1. .siteman/layouts/        — your project overrides (empty until you add one)
+#   2. your theme               — whatever you list before siteman-default below
+#   3. siteman-default          — siteman's shipped fallback layouts
+# All three coexist: a theme can render the site while siteman-default fills any
+# template it omits, and a file in .siteman/layouts/ always wins.
+theme = ["siteman-default"]
+
+[markup]
+  [markup.highlight]
+    noClasses = false
+
+# To use a theme, list it BEFORE "siteman-default" so it wins but still falls back
+# to siteman's defaults for anything it doesn't provide. Then run any siteman
+# command — siteman-sync fetches it for you:
+#
+#   theme = ["github.com/theme-author/theme-name", "siteman-default"]

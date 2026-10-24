@@ -14,3 +14,7 @@
 /.hugo_build.lock
 /public/
 # devenv.lock stays tracked. Testee needs it.
+# siteman
+/.siteman/resources/
+/.siteman/.cache/
+/tmp/.htmltest/

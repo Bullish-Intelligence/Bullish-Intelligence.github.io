@@ -1,13 +1,11 @@
 # Development environment of bullish-intelligence.github.io.
-{ pkgs, ... }:
+{ ... }:
 {
-  packages = [ pkgs.git pkgs.go pkgs.hugo ];
-
   # Testee runs the standard tasks (check:*, test:*).
   # Every task declares `input.testee`, so Testee can reuse a verdict when a commit
   # changes none of its inputs. Run `testee doctor` after any edit to this table.
   # devman's `base` group calls `base:check` and `base:test`.
-  # The required site check builds the Hugo site from its pinned theme modules.
+  # The required site check builds through siteman with pinned theme modules.
   tasks = {
     "check:lint" = {
       exec = ''
@@ -40,9 +38,9 @@
       exec = ''
         set -eu
         cd "$DEVENV_ROOT"
-        hugo --minify --destination "$TESTEE_RUN_DIR/public"
+        siteman-build --destination "$TESTEE_RUN_DIR/public"
       '';
-      input.testee.reads = [ "hugo.toml" "content/**" "go.mod" "go.sum" "_vendor/**" ];
+      input.testee.reads = [ ".siteman/hugo.toml" ".siteman/themes/siteman-default/**" "content/**" "go.mod" "go.sum" "_vendor/**" "tools/siteman/module/**" ];
     };
 
     "test:quick" = {
@@ -55,10 +53,11 @@
 
     "test:full" = {
       exec = ''
-        echo "n/a: blank site: nothing to test yet"
-        exit 0
+        set -eu
+        cd "$DEVENV_ROOT"
+        siteman-check
       '';
-      input.testee.ignores = [ "**" ];
+      input.testee.reads = [ ".siteman/**" ".github/workflows/**" "content/**" "devenv.lock" "go.mod" "go.sum" "_vendor/**" "tools/siteman/module/**" ];
     };
 
     "base:check" = {

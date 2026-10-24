@@ -1,8 +1,18 @@
 baseURL = "https://bullish-intelligence.github.io/"
 title = "Bullish Intelligence"
-theme = ["github.com/Bullish-Design/roxo-flex"]
+theme = ["github.com/Bullish-Design/roxo-flex", "siteman-default"]
 locale = "en-us"
 disableKinds = ["taxonomy", "term"]
+
+layoutDir = ".siteman/layouts"
+archetypeDir = ".siteman/archetypes"
+themesDir = ".siteman/themes"
+resourceDir = ".siteman/resources"
+publishDir = "public"
+
+[markup]
+  [markup.highlight]
+    noClasses = false
 
 [module.hugoVersion]
 extended = true

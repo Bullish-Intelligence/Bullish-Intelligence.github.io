@@ -1,0 +1,8 @@
+{{- /* Taxonomy page: every term, with its page count. */ -}}
+<h1>{{ .Title }}</h1>
+{{ .Content }}
+<ul class="term-list">
+  {{- range .Pages.ByTitle }}
+    <li><a class="tag" href="{{ .RelPermalink }}">{{ .LinkTitle }}</a> <span class="count">({{ len .Pages }})</span></li>
+  {{- end }}
+</ul>

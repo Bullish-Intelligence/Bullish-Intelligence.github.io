@@ -1,0 +1,13 @@
+{{ define "main" }}
+  <article>
+    <h1>{{ .Title }}</h1>
+    {{ partial "siteman/meta.html" . }}
+    {{ .Content }}
+  </article>
+  {{- if or .PrevInSection .NextInSection }}
+    <nav class="pager" aria-label="Pages in this section">
+      {{- with .NextInSection }}<a href="{{ .RelPermalink }}">&larr; {{ .LinkTitle }}</a>{{ end }}
+      {{- with .PrevInSection }}<a href="{{ .RelPermalink }}">{{ .LinkTitle }} &rarr;</a>{{ end }}
+    </nav>
+  {{- end }}
+{{ end }}

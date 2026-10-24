@@ -1,0 +1,5 @@
+{{- /* Term page: the pages that use one term. */ -}}
+<h1>{{ .Data.Singular | title }}: {{ .Title }}</h1>
+{{ .Content }}
+{{ partial "siteman/page-list.html" (dict "pages" .Pages) }}
+<p><a href="{{ (site.GetPage .Data.Plural).RelPermalink }}">All {{ .Data.Plural }}</a></p>

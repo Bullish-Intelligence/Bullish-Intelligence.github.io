@@ -1,0 +1,13 @@
+{{- /* A list of pages with date, tags, and a short summary. Pass dict "pages" <pages> "level" <heading level>. */ -}}
+{{- $level := .level | default 2 -}}
+<ul class="page-list">
+  {{- range .pages }}
+    <li>
+      <h{{ $level }}><a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a></h{{ $level }}>
+      {{ partial "siteman/meta.html" . }}
+      {{- with or .Description .Summary }}
+        <p>{{ . | plainify | replaceRE `\s+` " " | strings.TrimSpace | truncate 200 }}</p>
+      {{- end }}
+    </li>
+  {{- end }}
+</ul>

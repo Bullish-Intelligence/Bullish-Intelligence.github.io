@@ -56,8 +56,21 @@
     "root": {
       "inputs": {
         "devenv": "devenv",
-        "nixpkgs": "nixpkgs"
+        "nixpkgs": "nixpkgs",
+        "siteman": "siteman"
       }
+    },
+    "siteman": {
+      "flake": false,
+      "locked": {
+        "path": "tools/siteman",
+        "type": "path"
+      },
+      "original": {
+        "path": "tools/siteman",
+        "type": "path"
+      },
+      "parent": []
     }
   },
   "root": "root",

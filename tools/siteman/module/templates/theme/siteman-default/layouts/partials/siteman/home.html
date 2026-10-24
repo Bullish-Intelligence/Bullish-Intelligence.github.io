@@ -1,0 +1,11 @@
+{{- /* Home page: the page content, then the newest posts. */ -}}
+<h1>{{ .Site.Title }}</h1>
+{{ .Content }}
+{{- $posts := where .Site.RegularPages "Section" "posts" }}
+{{- with $posts }}
+  <h2>Recent posts</h2>
+  {{ partial "siteman/page-list.html" (dict "pages" (first 5 .) "level" 3) }}
+  {{- with site.GetPage "/posts" }}
+    <p><a href="{{ .RelPermalink }}">All posts</a></p>
+  {{- end }}
+{{- end }}

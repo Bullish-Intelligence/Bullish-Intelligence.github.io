@@ -1,0 +1,11 @@
+# siteman's shipped fallback theme. It renders a whole site on its own and, when
+# the user adds a real theme, fills only the templates that theme doesn't provide
+# (it ships no dedicated home template precisely so it never shadows a theme's
+# own home page — see module/lib/common.sh / README for the lookup-order reason).
+name        = "siteman-default"
+license     = "MIT"
+licenselink = "https://github.com/Bullish-Design/siteman/blob/main/LICENSE"
+description = "siteman's built-in fallback layouts."
+# The layouts use .Site.Language.Locale, which Hugo added in v0.158.0.
+# The top-level `locale` key in hugo.toml needs the same version.
+min_version = "0.158.0"

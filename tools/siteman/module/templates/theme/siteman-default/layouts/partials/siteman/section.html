@@ -1,0 +1,4 @@
+{{- /* Section list page. */ -}}
+<h1>{{ .Title }}</h1>
+{{ .Content }}
+{{ partial "siteman/page-list.html" (dict "pages" .Pages) }}

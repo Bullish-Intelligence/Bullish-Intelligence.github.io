@@ -1,0 +1,7 @@
+<footer class="site-footer">
+  <p>
+    {{- with .Site.Params.footer }}{{ . | markdownify }}
+    {{- else }}&copy; {{ now.Year }} {{ .Site.Title }}. Built with Hugo and siteman.
+    {{- end -}}
+  </p>
+</footer>

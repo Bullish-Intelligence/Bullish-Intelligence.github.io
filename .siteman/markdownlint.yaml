@@ -1,0 +1,11 @@
+# Configuration for `siteman-check`'s markdown-lint pass (markdownlint-cli2).
+# This is a markdownlint rules file; docs:
+# https://github.com/DavidAnson/markdownlint/blob/main/doc/Rules.md
+default: true
+
+# MD013 (line-length): off — prose wraps naturally, no hard column limit.
+MD013: false
+
+# MD041 (first line must be a top-level heading): off — content starts with
+# TOML/YAML front matter, not an H1.
+MD041: false

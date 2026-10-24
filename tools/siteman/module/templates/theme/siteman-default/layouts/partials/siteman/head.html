@@ -1,0 +1,30 @@
+{{- /* Head content. Every URL here goes through RelPermalink, Permalink, or relURL, so a subpath baseURL works. */ -}}
+{{- $description := "" -}}
+{{- with .Description }}{{ $description = . }}
+{{- else }}
+  {{- if and .IsPage (not .IsHome) }}{{ $description = .Summary | plainify | replaceRE `\s+` " " | strings.TrimSpace | truncate 160 }}
+  {{- else }}{{ with .Site.Params.description }}{{ $description = . }}{{ end }}
+  {{- end }}
+{{- end -}}
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>{{ if or .IsHome (eq .Kind "404") }}{{ .Site.Title }}{{ else }}{{ .Title }} · {{ .Site.Title }}{{ end }}</title>
+{{- with $description }}
+<meta name="description" content="{{ . }}">
+{{- end }}
+{{- if ne .Kind "404" }}
+<link rel="canonical" href="{{ .Permalink }}">
+<meta property="og:title" content="{{ .Title }}">
+<meta property="og:type" content="{{ if .IsPage }}article{{ else }}website{{ end }}">
+<meta property="og:url" content="{{ .Permalink }}">
+{{- with $description }}
+<meta property="og:description" content="{{ . }}">
+{{- end }}
+{{- range .AlternativeOutputFormats }}
+<link rel="{{ .Rel }}" type="{{ .MediaType.Type }}" href="{{ .Permalink }}" title="{{ $.Site.Title }}">
+{{- end }}
+{{- end }}
+{{- with resources.Get "css/siteman-default.css" | minify | fingerprint }}
+<link rel="stylesheet" href="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}">
+{{- end }}

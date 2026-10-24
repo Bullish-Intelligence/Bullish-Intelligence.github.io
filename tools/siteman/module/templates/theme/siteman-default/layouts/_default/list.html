@@ -1,0 +1,20 @@
+{{/*
+  One template for the home page, section lists, taxonomy lists, and term pages.
+  siteman-default deliberately ships NO index.html / home.html / taxonomy.html /
+  term.html: Hugo resolves a more-specific template from ANY active theme
+  before a less-specific one (like list.html) from a higher-priority theme, so a
+  dedicated template here would shadow a real theme's own page of that kind
+  regardless of the `theme = [...]` order. This file branches on the page kind
+  and hands the work to partials under partials/siteman/.
+*/}}
+{{ define "main" }}
+  {{ if .IsHome }}
+    {{ partial "siteman/home.html" . }}
+  {{ else if eq .Kind "taxonomy" }}
+    {{ partial "siteman/taxonomy.html" . }}
+  {{ else if eq .Kind "term" }}
+    {{ partial "siteman/term.html" . }}
+  {{ else }}
+    {{ partial "siteman/section.html" . }}
+  {{ end }}
+{{ end }}

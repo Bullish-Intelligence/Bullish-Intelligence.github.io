@@ -1,0 +1,14 @@
+# Configuration for `siteman-check`'s broken-link pass (htmltest).
+# Docs: https://github.com/wjdp/htmltest
+#
+# siteman-check passes the real publish directory (publishDir in hugo.toml) on
+# the command line, which overrides DirectoryPath below. Keep this line for
+# running htmltest by hand.
+DirectoryPath: "public"
+
+# Internal-only by default: fast and deterministic (no network, no flaky
+# third-party sites). Flip to true to also validate external URLs.
+CheckExternal: false
+
+# Hugo emits pretty "/page/" URLs; don't flag the missing trailing-slash form.
+IgnoreDirectoryMissingTrailingSlash: true

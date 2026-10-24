@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="{{ .Site.Language.Locale | default "en" }}">
+  <head>
+    {{ partial "siteman/head.html" . }}
+  </head>
+  <body>
+    <a class="skip-link" href="#content">Skip to content</a>
+    {{ partial "siteman/header.html" . }}
+    <main id="content">{{ block "main" . }}{{ end }}</main>
+    {{ partial "siteman/footer.html" . }}
+  </body>
+</html>
